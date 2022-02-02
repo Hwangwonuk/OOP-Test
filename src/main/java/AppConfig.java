@@ -1,0 +1,20 @@
+import service.monster.attack.MonsterAttackService;
+import service.monster.attack.MonsterAttackServiceImpl;
+import service.tribe.skill.SkillService;
+import service.tribe.skill.SkillServiceImpl;
+import service.tribe.weapon.WeaponService;
+import service.tribe.weapon.WeaponServiceImpl;
+
+public class AppConfig {
+    public WeaponService weaponService() {
+        return new WeaponServiceImpl();
+    }
+
+    public SkillService skillService() {
+        return new SkillServiceImpl();
+    }
+
+    public MonsterAttackService monsterAttackService() {
+        return new MonsterAttackServiceImpl();
+    }
+}
