@@ -144,6 +144,8 @@ public class SkillServiceImpl implements SkillService {
     public void useUltimateSkill(Tribe tribe, UltimateSkill ultimateSkill) {
         tribe.validateAlive();
 
+        validateSkillCompatibility(tribe, ultimateSkill);
+
         checkRemainMp(tribe, ultimateSkill);
 
         calculateUltimateSkillDodgePercentage(tribe, ultimateSkill);
@@ -153,6 +155,12 @@ public class SkillServiceImpl implements SkillService {
         calculateUltimateSkillAttackPower(tribe, ultimateSkill);
 
         calculateUltimateSkillMp(tribe, ultimateSkill);
+    }
+
+    private void validateSkillCompatibility(Tribe tribe, UltimateSkill ultimateSkill) {
+        if (!ultimateSkill.getSkillTribe().equals(tribe.getTribeName())){
+            throw new RuntimeException("종족에 맞는 스킬을 사용해주세요.");
+        }
     }
 
     private void checkRemainMp(Tribe tribe, UltimateSkill ultimateSkill) {
