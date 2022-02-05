@@ -1,8 +1,8 @@
 package service.tribe.skill;
 
+import skill.common.CommonSkill;
 import skill.tribe.TribeSkill;
 import skill.tribe.UltimateSkill;
-import skill.common.CommonSkill;
 import tribe.Tribe;
 
 public interface SkillService {

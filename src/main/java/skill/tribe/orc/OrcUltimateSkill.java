@@ -1,8 +1,8 @@
 package skill.tribe.orc;
 
 import skill.tribe.UltimateSkill;
-import util.SkillStatKeys;
 import tribe.TribeName;
+import util.SkillStatKeys;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

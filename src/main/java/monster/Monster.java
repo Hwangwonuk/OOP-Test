@@ -68,6 +68,7 @@ public abstract class Monster {
     public void validateAlive() {
         if(isDead())
             throw new RuntimeException("이미 죽은 몬스터입니다");
+        
     }
 
     public void takeDamage(BigDecimal damage) {

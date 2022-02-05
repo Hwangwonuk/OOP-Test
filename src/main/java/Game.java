@@ -1,7 +1,10 @@
+import monster.Slime;
 import service.monster.attack.MonsterAttackService;
 import service.tribe.skill.SkillService;
+import service.tribe.weapon.ElfWeaponService;
+import service.tribe.weapon.HumanWeaponService;
+import service.tribe.weapon.OrcWeaponService;
 import service.tribe.weapon.WeaponService;
-import monster.Slime;
 import skill.common.Heal;
 import skill.common.Steam;
 import skill.tribe.elf.Elusion;
@@ -12,10 +15,10 @@ import skill.tribe.orc.Frenzy;
 import tribe.Elf;
 import tribe.Human;
 import tribe.Orc;
-import weapon.orc.blunt.IronHammer;
-import weapon.orc.blunt.ShortAxe;
 import weapon.elf.bow.ShortBow;
 import weapon.human.sword.LongSword;
+import weapon.orc.blunt.IronHammer;
+import weapon.orc.blunt.ShortAxe;
 
 import java.math.BigDecimal;
 
@@ -25,6 +28,99 @@ public class Game {
         WeaponService weaponService = appConfig.weaponService();
         SkillService skillService = appConfig.skillService();
         MonsterAttackService monsterAttackService = appConfig.monsterAttackService();
+        // WeaponService 추가
+        HumanWeaponService humanWeaponService = appConfig.humanWeaponService();
+        ElfWeaponService elfWeaponService = appConfig.elfWeaponService();
+        OrcWeaponService orcWeaponService = appConfig.orcWeaponService();
+
+
+
+        System.out.println("새로운 서비스 오크 무기 착용 + 무기 공격 + 몬스터 반격 + 오크 회피 테스트\n");
+        Orc orc = new Orc(
+                1, // 레벨
+                new BigDecimal(100), // 체력
+                new BigDecimal(100), // 마력
+                new BigDecimal(10), // 공격력
+                new BigDecimal(10), // 공격속도
+                new BigDecimal(50), // 방어력
+                new BigDecimal(30) // 회피율
+        );
+
+        Slime slime7 = new Slime(
+                new BigDecimal(100), // 체력
+                new BigDecimal(10), // 공격력
+                new BigDecimal(1) // 방어력
+        );
+
+        System.out.println("\n착용전 공격력 : " + orc.getTotalAttackPower());
+        System.out.println("착용전 공격속도 : " + orc.getTotalAttackSpeed());
+        orcWeaponService.equipWeapon(orc, new ShortAxe());
+        System.out.println("착용후 공격력 : " + orc.getTotalAttackPower());
+        System.out.println("착용후 공격속도 : " + orc.getTotalAttackSpeed());
+
+        System.out.println("\n때리기 전 캐릭터 생명력 : " + orc.getHp());
+        System.out.println("때리기 전 몬스터 생명력: " + slime7.getHp());
+        orcWeaponService.attack(orc, slime7);
+        System.out.println("때린 후 캐릭터 생명력 : " + orc.getHp());
+        System.out.println("때린 후 몬스터 생명력 : " + slime7.getHp());
+
+        System.out.println("새로운 서비스 엘프 무기 착용 + 무기 공격 + 몬스터 반격 + 엘프 회피 테스트\n");
+        Elf elf = new Elf(
+                1, // 레벨
+                new BigDecimal(100), // 체력
+                new BigDecimal(100), // 마력
+                new BigDecimal(10), // 공격력
+                new BigDecimal(10), // 공격속도
+                new BigDecimal(50), // 방어력
+                new BigDecimal(30) // 회피율
+        );
+
+        Slime slime6 = new Slime(
+                new BigDecimal(100), // 체력
+                new BigDecimal(10), // 공격력
+                new BigDecimal(1) // 방어력
+        );
+
+        System.out.println("\n착용전 공격력 : " + elf.getTotalAttackPower());
+        System.out.println("착용전 공격속도 : " + elf.getTotalAttackSpeed());
+        elfWeaponService.equipWeapon(elf, new ShortBow());
+        System.out.println("착용후 공격력 : " + elf.getTotalAttackPower());
+        System.out.println("착용후 공격속도 : " + elf.getTotalAttackSpeed());
+
+        System.out.println("\n때리기 전 캐릭터 생명력 : " + elf.getHp());
+        System.out.println("때리기 전 몬스터 생명력: " + slime6.getHp());
+        elfWeaponService.attack(elf, slime6);
+        System.out.println("때린 후 캐릭터 생명력 : " + elf.getHp());
+        System.out.println("때린 후 몬스터 생명력 : " + slime6.getHp());
+
+        System.out.println("새로운 서비스 휴먼 무기 착용 + 무기 공격 + 몬스터 반격 + 휴먼 회피 테스트\n");
+        Human human5 = new Human(
+                1, // 레벨
+                new BigDecimal(100), // 체력
+                new BigDecimal(100), // 마력
+                new BigDecimal(10), // 공격력
+                new BigDecimal(10), // 공격속도
+                new BigDecimal(50), // 방어력
+                new BigDecimal(30) // 회피율
+        );
+
+        Slime slime5 = new Slime(
+                new BigDecimal(100), // 체력
+                new BigDecimal(10), // 공격력
+                new BigDecimal(1) // 방어력
+        );
+
+        System.out.println("\n착용전 공격력 : " + human5.getTotalAttackPower());
+        System.out.println("착용전 공격속도 : " + human5.getTotalAttackSpeed());
+        humanWeaponService.equipWeapon(human5, new LongSword());
+        System.out.println("착용후 공격력 : " + human5.getTotalAttackPower());
+        System.out.println("착용후 공격속도 : " + human5.getTotalAttackSpeed());
+
+        System.out.println("\n때리기 전 캐릭터 생명력 : " + human5.getHp());
+        System.out.println("때리기 전 몬스터 생명력: " + slime5.getHp());
+        humanWeaponService.attack(human5, slime5);
+        System.out.println("때린 후 캐릭터 생명력 : " + human5.getHp());
+        System.out.println("때린 후 몬스터 생명력 : " + slime5.getHp());
 
         System.out.println("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
         System.out.println("휴먼 무기 착용 + 무기 공격 + 몬스터 반격 + 휴먼 회피 테스트\n");
@@ -43,6 +139,7 @@ public class Game {
                 new BigDecimal(10), // 공격력
                 new BigDecimal(1) // 방어력
         );
+
 
         System.out.println("\n착용전 공격력 : " + human1.getTotalAttackPower());
         System.out.println("착용전 공격속도 : " + human1.getTotalAttackSpeed());
